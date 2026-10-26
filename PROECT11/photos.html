@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Explore photos of Foodie's food and kitchen." />
+    <title>Photos — STEP Restaurant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="api.js"></script>
+    <script src="shell.js" defer></script>
+    <script src="products.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body data-page="photos">
+    <div id="site-header"></div>
+    <main>
+      <section class="page-banner photos-banner">
+        <div class="page-banner-content">
+          <p class="eyebrow eyebrow-light"><span></span> A taste of Foodie</p>
+          <h1>Our <em>Photos</em></h1>
+          <p>Take a look at the dishes and people behind every meal.</p>
+        </div>
+      </section>
+      <section class="photos-section" aria-label="Restaurant photo gallery">
+        <div class="photos-grid">
+          <figure class="photo-card">
+            <img src="assets/restaurant-food-spread.png" alt="A table filled with freshly prepared restaurant dishes" fetchpriority="high" />
+            <figcaption>Freshly prepared, ready to share</figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/restaurant-kitchen-chef-cooking.jpg" alt="A chef preparing a meal in the restaurant kitchen" loading="lazy" />
+            <figcaption>Made with care in our kitchen</figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+    <div id="site-footer"></div>
+  </body>
+</html>

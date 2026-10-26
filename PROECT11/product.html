@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Product details, ingredients, and preparation." />
+    <title>Product — Foodie</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="api.js"></script>
+    <script src="products.js" defer></script>
+    <script src="shell.js" defer></script>
+    <script src="app.js" defer></script>
+    <script src="product.js" defer></script>
+  </head>
+  <body data-page="product">
+    <div id="site-header"></div>
+    <main class="product-page">
+      <section class="product-detail" id="product-detail" aria-live="polite" hidden>
+        <div class="product-detail-image-wrap">
+          <img class="product-detail-image" id="detail-image" src="" alt="" />
+        </div>
+        <div class="product-detail-content">
+          <h1 id="detail-name"></h1>
+          <div class="detail-rating">
+            <span class="detail-stars" id="detail-stars" aria-hidden="true"></span>
+            <span id="detail-rating"></span>
+          </div>
+          <p class="detail-price" id="detail-price"></p>
+          <span class="vegetarian-badge" id="detail-vegetarian" hidden>✓ Vegetarian</span>
+          <p class="detail-description" id="detail-description"></p>
+          <h2>Ingredients:</h2>
+          <ul class="detail-ingredients" id="detail-ingredients"></ul>
+          <h2>Preparation Method:</h2>
+          <p class="detail-preparation" id="detail-preparation"></p>
+          <div class="detail-actions">
+            <div class="detail-quantity-control" aria-label="Select quantity">
+              <button type="button" data-quantity-change="-1" aria-label="Remove one">−</button>
+              <input id="detail-quantity" type="number" min="1" max="99" value="1" aria-label="Quantity" />
+              <button type="button" data-quantity-change="1" aria-label="Add one">+</button>
+            </div>
+            <button class="button button-primary detail-add-button" id="detail-add" type="button" data-add="">Add to Cart</button>
+          </div>
+        </div>
+      </section>
+      <section class="product-not-found" id="product-not-found" hidden>
+        <h1>Product not found</h1>
+        <p>Choose a product from the menu to see its details.</p>
+        <a class="button button-primary" href="menu.html#menu-products">Browse menu</a>
+      </section>
+      <section class="related-products" id="related-products-section" hidden>
+        <h2>You May Also Like</h2>
+        <div class="product-grid related-products-grid" id="product-grid" aria-live="polite"></div>
+      </section>
+    </main>
+    <div id="site-footer"></div>
+  </body>
+</html>

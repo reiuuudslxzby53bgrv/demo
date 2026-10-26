@@ -1,0 +1,12 @@
+{
+  "name": "restaurant-app",
+  "version": "1.0.0",
+  "description": "STEP Academy Restaurant Web App connected to RestaurantAPI",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["restaurant", "foodie", "api", "step-academy"],
+  "author": "",
+  "license": "ISC"
+}

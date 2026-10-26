@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Delicious food delivered to your door. Fresh ingredients, authentic flavors, fast delivery." />
+    <title>STEP Restaurant — Delicious food delivered to your door</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="api.js"></script>
+    <script src="shell.js" defer></script>
+    <script src="products.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body data-page="home">
+    <div id="site-header"></div>
+    <main>
+      <section class="hero" id="home">
+        <img
+          class="hero-image"
+          src="assets/restaurant-food-spread.png"
+          alt="A table filled with freshly prepared restaurant dishes"
+          fetchpriority="high"
+        />
+        <div class="hero-content">
+          <h1>Delicious Food Delivered to Your Door</h1>
+          <p class="hero-copy">Fresh ingredients, authentic flavors, fast delivery</p>
+          <a class="button button-primary button-large" href="menu.html#menu-products">Order Now</a>
+        </div>
+      </section>
+
+      <section class="section-wrap featured-section" id="favorites">
+        <div class="section-heading">
+          <h2>Popular Dishes</h2>
+        </div>
+        <div class="product-grid" id="product-grid" data-featured-only="true" aria-live="polite"></div>
+      </section>
+
+      <section class="home-story">
+        <div class="home-story-inner">
+          <div class="home-story-image">
+            <img src="assets/restaurant-kitchen-chef-cooking.jpg" alt="A chef preparing a meal in the restaurant kitchen" loading="lazy" />
+          </div>
+          <div class="home-story-copy">
+            <h2>Our Story</h2>
+            <p>At Foodie, we believe that great food brings people together. Our chefs use only the freshest ingredients to create dishes that delight your taste buds and warm your heart.</p>
+            <p>From traditional recipes passed down through generations to innovative modern cuisine, every dish is crafted with passion and care. We're committed to delivering not just meals, but memorable dining experiences right to your door.</p>
+            <a class="button button-primary" href="menu.html">Explore Our Menu</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div id="site-footer"></div>
+  </body>
+</html>

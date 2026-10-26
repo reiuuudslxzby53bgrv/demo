@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Create your Foodie account." />
+    <title>Sign Up — Foodie</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="api.js"></script>
+    <script type="module" src="auth.js"></script>
+  </head>
+  <body class="auth-page">
+    <main class="auth-card">
+      <header class="auth-heading">
+        <h1>Create Account</h1>
+        <p>Join us today</p>
+      </header>
+      <form class="auth-form signup-form" data-auth-form data-auth-kind="signup">
+        <div class="auth-name-row">
+          <label class="auth-field" for="first-name">
+            <span>First Name</span>
+            <input id="first-name" name="given-name" type="text" placeholder="John" autocomplete="given-name" required />
+          </label>
+          <label class="auth-field" for="last-name">
+            <span>Last Name</span>
+            <input id="last-name" name="family-name" type="text" placeholder="Doe" autocomplete="family-name" required />
+          </label>
+        </div>
+        <label class="auth-field" for="email">
+          <span>Email</span>
+          <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required />
+        </label>
+        <label class="auth-field" for="password">
+          <span>Password</span>
+          <span class="password-input">
+            <input id="password" name="password" type="password" placeholder="••••••••" autocomplete="new-password" required minlength="8" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}" aria-describedby="password-requirements" />
+            <button class="password-toggle" type="button" aria-label="Show password" aria-pressed="false" data-password-toggle>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.3-6 9.5-6 9.5 6 9.5 6-3.3 6-9.5 6-9.5-6-9.5-6Z" /><circle cx="12" cy="12" r="2.5" /></svg>
+            </button>
+          </span>
+        </label>
+        <ul class="password-requirements" id="password-requirements">
+          <li>At least 8 characters</li>
+          <li>Uppercase and lowercase letters</li>
+          <li>At least one number</li>
+          <li>At least one special character</li>
+        </ul>
+        <button class="auth-submit" type="submit">Create Account</button>
+        <p class="auth-message" role="status" aria-live="polite" data-auth-message></p>
+      </form>
+      <footer class="auth-footer">
+        <p>Already have an account? <a href="login.html">Sign in</a></p>
+      </footer>
+    </main>
+  </body>
+</html>

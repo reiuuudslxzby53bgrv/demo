@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="View and manage your Foodie profile." />
+    <title>My Profile — Foodie</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="api.js"></script>
+    <script src="shell.js" defer></script>
+    <script src="products.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body data-page="profile">
+    <div id="site-header"></div>
+    <main class="profile-layout" style="width: min(800px, 94vw); margin: 40px auto; padding: 20px;">
+      <header style="margin-bottom: 24px; border-bottom: 1px solid #eee; padding-bottom: 16px;">
+        <h1 style="font-size: 28px; margin: 0 0 6px;">My Profile</h1>
+        <p style="color: #666; margin: 0;">Manage your personal information and security settings</p>
+      </header>
+
+      <div id="profile-loading" style="text-align: center; padding: 40px; color: #888;">
+        Loading profile details...
+      </div>
+
+      <div id="profile-content" hidden>
+        <!-- User Info Card -->
+        <section class="auth-card" style="width: 100%; margin-bottom: 24px; box-sizing: border-box;">
+          <h2 style="font-size: 18px; margin: 0 0 16px;">Personal Details</h2>
+          <form class="auth-form" id="edit-profile-form">
+            <div class="auth-name-row">
+              <label class="auth-field" for="profile-first-name">
+                <span>First Name</span>
+                <input id="profile-first-name" name="firstName" type="text" required />
+              </label>
+              <label class="auth-field" for="profile-last-name">
+                <span>Last Name</span>
+                <input id="profile-last-name" name="lastName" type="text" required />
+              </label>
+            </div>
+            <label class="auth-field" for="profile-email">
+              <span>Email Address</span>
+              <input id="profile-email" name="email" type="email" disabled style="background:#eee; cursor:not-allowed;" />
+            </label>
+            <div class="auth-name-row">
+              <label class="auth-field" for="profile-phone">
+                <span>Phone Number</span>
+                <input id="profile-phone" name="phoneNumber" type="tel" placeholder="+995 555 123456" />
+              </label>
+              <label class="auth-field" for="profile-age">
+                <span>Age</span>
+                <input id="profile-age" name="age" type="number" min="1" max="120" placeholder="25" />
+              </label>
+            </div>
+            <label class="auth-field" for="profile-address">
+              <span>Delivery Address</span>
+              <input id="profile-address" name="address" type="text" placeholder="123 Rustaveli Ave, Tbilisi" />
+            </label>
+            <button class="auth-submit" type="submit" style="margin-top: 8px;">Save Profile</button>
+            <p id="profile-message" class="auth-message" role="status" aria-live="polite" style="display:none;"></p>
+          </form>
+        </section>
+
+        <!-- Change Password Card -->
+        <section class="auth-card" style="width: 100%; margin-bottom: 24px; box-sizing: border-box;">
+          <h2 style="font-size: 18px; margin: 0 0 16px;">Security & Password</h2>
+          <form class="auth-form" id="change-password-form">
+            <label class="auth-field" for="old-password">
+              <span>Current Password</span>
+              <input id="old-password" name="oldPassword" type="password" required />
+            </label>
+            <div class="auth-name-row">
+              <label class="auth-field" for="new-password">
+                <span>New Password</span>
+                <input id="new-password" name="newPassword" type="password" minlength="8" required />
+              </label>
+              <label class="auth-field" for="confirm-password">
+                <span>Confirm New Password</span>
+                <input id="confirm-password" name="confirmPassword" type="password" minlength="8" required />
+              </label>
+            </div>
+            <button class="auth-submit" type="submit" style="margin-top: 8px;">Change Password</button>
+            <p id="password-message" class="auth-message" role="status" aria-live="polite" style="display:none;"></p>
+          </form>
+        </section>
+
+        <!-- Danger Zone -->
+        <section style="display: flex; justify-content: space-between; align-items: center; padding: 16px; border: 1px solid #ffcdd2; border-radius: 8px; background: #fff5f5;">
+          <div>
+            <strong style="color: #c62828;">Delete Account</strong>
+            <p style="margin: 4px 0 0; font-size: 12px; color: #777;">Permanently delete your profile and order history</p>
+          </div>
+          <button id="delete-account-btn" type="button" style="background:#d32f2f; color:#fff; border:0; padding:8px 16px; border-radius:6px; cursor:pointer; font-size:12px;">Delete Account</button>
+        </section>
+      </div>
+    </main>
+    <div id="site-footer"></div>
+
+    <script type="module">
+      import { api } from "./api.js";
+
+      if (!api.isLoggedIn()) {
+        window.location.href = "login.html?redirect=profile.html";
+      }
+
+      async function loadProfileData() {
+        const loading = document.getElementById("profile-loading");
+        const content = document.getElementById("profile-content");
+
+        try {
+          const profile = await api.getProfile();
+          document.getElementById("profile-first-name").value = profile.firstName || "";
+          document.getElementById("profile-last-name").value = profile.lastName || "";
+          document.getElementById("profile-email").value = profile.email || "";
+          document.getElementById("profile-phone").value = profile.phoneNumber || "";
+          document.getElementById("profile-age").value = profile.age || "";
+          document.getElementById("profile-address").value = profile.address || "";
+
+          loading.hidden = true;
+          content.hidden = false;
+        } catch (err) {
+          loading.textContent = "Failed to load profile. Please try logging in again.";
+          console.error(err);
+        }
+      }
+
+      document.getElementById("edit-profile-form")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const msg = document.getElementById("profile-message");
+        const btn = e.target.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = "Saving...";
+
+        const payload = {
+          firstName: document.getElementById("profile-first-name").value.trim(),
+          lastName: document.getElementById("profile-last-name").value.trim(),
+          phoneNumber: document.getElementById("profile-phone").value.trim(),
+          age: document.getElementById("profile-age").value ? Number(document.getElementById("profile-age").value) : null,
+          address: document.getElementById("profile-address").value.trim(),
+          picture: null
+        };
+
+        try {
+          await api.editProfile(payload);
+          msg.textContent = "Profile updated successfully!";
+          msg.dataset.state = "success";
+          msg.style.display = "block";
+        } catch (err) {
+          msg.textContent = err.message || "Could not update profile.";
+          msg.dataset.state = "error";
+          msg.style.display = "block";
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Save Profile";
+        }
+      });
+
+      document.getElementById("change-password-form")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const msg = document.getElementById("password-message");
+        const oldPassword = document.getElementById("old-password").value;
+        const newPassword = document.getElementById("new-password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+
+        if (newPassword !== confirmPassword) {
+          msg.textContent = "New password and confirmation do not match.";
+          msg.dataset.state = "error";
+          msg.style.display = "block";
+          return;
+        }
+
+        const btn = e.target.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = "Updating...";
+
+        try {
+          await api.changePassword({ oldPassword, newPassword, confirmPassword });
+          msg.textContent = "Password changed successfully!";
+          msg.dataset.state = "success";
+          msg.style.display = "block";
+          e.target.reset();
+        } catch (err) {
+          msg.textContent = err.message || "Failed to change password.";
+          msg.dataset.state = "error";
+          msg.style.display = "block";
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Change Password";
+        }
+      });
+
+      document.getElementById("delete-account-btn")?.addEventListener("click", async () => {
+        if (confirm("Are you sure you want to permanently delete your account? This action cannot be undone.")) {
+          try {
+            await api.deleteAccount();
+            alert("Account deleted.");
+            window.location.href = "index.html";
+          } catch (err) {
+            alert(err.message || "Failed to delete account.");
+          }
+        }
+      });
+
+      loadProfileData();
+    </script>
+  </body>
+</html>

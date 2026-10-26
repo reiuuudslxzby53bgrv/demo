@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Sign in to your Foodie account." />
+    <title>Login — Foodie</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="api.js"></script>
+    <script type="module" src="auth.js"></script>
+  </head>
+  <body class="auth-page">
+    <main class="auth-card">
+      <header class="auth-heading">
+        <h1>Welcome Back</h1>
+        <p>Sign in to your account</p>
+      </header>
+      <form class="auth-form" data-auth-form>
+        <label class="auth-field" for="email">
+          <span>Email</span>
+          <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required />
+        </label>
+        <label class="auth-field" for="password">
+          <span>Password</span>
+          <span class="password-input">
+            <input id="password" name="password" type="password" placeholder="••••••••" autocomplete="current-password" required />
+            <button class="password-toggle" type="button" aria-label="Show password" aria-pressed="false" data-password-toggle>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.3-6 9.5-6 9.5 6 9.5 6-3.3 6-9.5 6-9.5-6-9.5-6Z" /><circle cx="12" cy="12" r="2.5" /></svg>
+            </button>
+          </span>
+        </label>
+        <div class="auth-options">
+          <label class="remember-option"><input type="checkbox" name="remember" /> <span>Remember me</span></label>
+          <button class="auth-text-button" type="button" data-forgot-password>Forgot password?</button>
+        </div>
+        <button class="auth-submit" type="submit">Sign In</button>
+        <p class="auth-message" role="status" aria-live="polite" data-auth-message></p>
+      </form>
+      <footer class="auth-footer">
+        <span>or</span>
+        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+      </footer>
+    </main>
+  </body>
+</html>

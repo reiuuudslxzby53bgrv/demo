@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Browse the Foodie menu and order fresh Italian favorites." />
+    <title>Menu — Foodie</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="api.js"></script>
+    <script src="shell.js" defer></script>
+    <script src="products.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body data-page="menu">
+    <div id="site-header"></div>
+    <main>
+      <section class="menu-layout" id="menu-products" aria-label="Restaurant menu">
+        <aside class="menu-filters" aria-labelledby="filters-title">
+          <h2 id="filters-title">Filters</h2>
+          <label class="filter-search-label" for="menu-search">Search</label>
+          <input class="filter-search" id="menu-search" type="search" placeholder="Search dishes..." autocomplete="off" />
+
+          <fieldset class="filter-categories">
+            <legend>Categories</legend>
+            <label><input type="checkbox" data-menu-category value="Desserts" /> Desserts</label>
+            <label><input type="checkbox" data-menu-category value="First Courses" /> First Courses</label>
+            <label><input type="checkbox" data-menu-category value="Main Courses" /> Main Courses</label>
+            <label><input type="checkbox" data-menu-category value="Pizzas" /> Pizzas</label>
+            <label><input type="checkbox" data-menu-category value="Side Dishes" /> Side Dishes</label>
+            <label><input type="checkbox" data-menu-category value="Appetizers" /> Appetizers</label>
+          </fieldset>
+
+          <label class="vegan-filter" for="vegan-only">
+            <span>Vegan Only</span>
+            <input id="vegan-only" type="checkbox" />
+            <span class="filter-switch" aria-hidden="true"></span>
+          </label>
+
+          <label class="range-filter" for="spice-level">
+            <span>Spiciness (0-5)</span>
+            <input id="spice-level" type="range" min="0" max="5" step="1" value="0" />
+            <small id="spice-value">Level: not selected</small>
+          </label>
+
+          <label class="range-filter" for="min-rating">
+            <span>Minimum Rating</span>
+            <input id="min-rating" type="range" min="0" max="5" step="0.1" value="0" />
+            <small><span aria-hidden="true">★</span> <span id="rating-value">0.0+</span></small>
+          </label>
+
+          <label class="range-filter" for="min-price">
+            <span>Min price</span>
+            <input id="min-price" type="range" min="0" max="500" step="1" value="0" />
+            <small id="min-price-value">$0+</small>
+          </label>
+
+          <label class="range-filter" for="max-price">
+            <span>Max price</span>
+            <input id="max-price" type="range" min="0" max="500" step="1" value="500" />
+            <small id="max-price-value">$500+</small>
+          </label>
+
+          <button class="clear-filters" id="clear-filters" type="button">Clear All Filters</button>
+        </aside>
+
+        <div class="menu-results">
+          <header class="menu-results-heading">
+            <h1>Menu</h1>
+            <p>Showing <span id="results-count">10</span> products</p>
+          </header>
+          <div class="product-grid" id="product-grid" aria-live="polite"></div>
+          <p class="empty-state" id="empty-state" hidden>No dishes found. Try changing your filters.</p>
+          <nav class="menu-pagination" id="menu-pagination" aria-label="Menu pages"></nav>
+        </div>
+      </section>
+    </main>
+    <div id="site-footer"></div>
+  </body>
+</html>
